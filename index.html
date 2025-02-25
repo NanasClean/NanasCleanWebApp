@@ -24,6 +24,11 @@
         b {
             font-weight: bold;
         }
+        .bg-nanas-clean {
+            background-image: url('assets/monos.png'); /* Cambia por tu imagen de fondo */
+            background-size: cover;
+            background-position: center;
+        }
     </style>
     <script>
         window.addEventListener('scroll', function () {
@@ -146,6 +151,161 @@
     <!-- Image full width -->
     <div class="w-full bg-white flex items-center justify-center py-12">
         <img src="assets/slice.png" alt="REPSE y Trabajo" class="w-full h-[200px] object-cover">
+    </div>
+
+
+    <div class="bg-white flex items-center justify-center min-h-screen">
+        <div class="bg-nanas-clean p-8 rounded-lg shadow-lg w-full max-w-4xl text-black"> <!-- Cambiar texto a negro -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold">Cotiza tu Servicio de Limpieza</h1>
+                <div class="flex justify-center space-x-4 mt-4">
+                    <span>Información Básica</span>
+                    <span>Detalles del Servicio</span>
+                    <span>Dirección</span>
+                </div>
+            </div>
+    
+            <!-- Paso 1: Información Básica -->
+            <div id="step1" class="step">
+                <h2 class="text-2xl font-bold mb-4">Información Básica</h2>
+                <div class="mb-4">
+                    <label for="empresa" class="block text-sm font-medium mb-2">Nombre de la Empresa</label>
+                    <input type="text" id="empresa" placeholder="Nombre de la Empresa" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
+                    <input type="email" id="email" placeholder="Correo Electrónico" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="telefono" class="block text-sm font-medium mb-2">Número de Contacto</label>
+                    <input type="tel" id="telefono" placeholder="Número de Contacto" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="flex justify-between">
+                    <button disabled class="bg-gray-500 text-white p-2 rounded opacity-50 cursor-not-allowed">Regresar</button>
+                    <button onclick="nextStep(1)" class="bg-blue-500 text-white p-2 rounded">Continuar</button>
+                </div>
+            </div>
+    
+            <!-- Paso 2: Detalles del Servicio -->
+            <div id="step2" class="step hidden">
+                <h2 class="text-2xl font-bold mb-4">Detalles del Servicio</h2>
+                <div class="mb-4">
+                    <label for="horas" class="block text-sm font-medium mb-2">Horas de Servicio por Semana</label>
+                    <input type="number" id="horas" placeholder="Horas por Semana" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="nanas" class="block text-sm font-medium mb-2">Cantidad de Nanas Requeridas</label>
+                    <input type="number" id="nanas" placeholder="Número de Nanas" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="flex justify-between">
+                    <button onclick="prevStep(2)" class="bg-gray-500 text-white p-2 rounded">Regresar</button>
+                    <button onclick="nextStep(2)" class="bg-blue-500 text-white p-2 rounded">Continuar</button>
+                </div>
+            </div>
+    
+            <!-- Paso 3: Dirección -->
+            <div id="step3" class="step hidden">
+                <h2 class="text-2xl font-bold mb-4">Ingresa tu Dirección</h2>
+                <div class="mb-4">
+                    <label for="calle" class="block text-sm font-medium mb-2">Calle</label>
+                    <input type="text" id="calle" placeholder="Calle" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="numero" class="block text-sm font-medium mb-2">Número</label>
+                    <input type="text" id="numero" placeholder="Número" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="colonia" class="block text-sm font-medium mb-2">Colonia</label>
+                    <input type="text" id="colonia" placeholder="Colonia" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="ciudad" class="block text-sm font-medium mb-2">Ciudad</label>
+                    <input type="text" id="ciudad" placeholder="Ciudad" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="estado" class="block text-sm font-medium mb-2">Estado</label>
+                    <input type="text" id="estado" placeholder="Estado" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="cp" class="block text-sm font-medium mb-2">Código Postal</label>
+                    <input type="text" id="cp" placeholder="Código Postal" class="w-full p-2 border rounded text-black">
+                </div>
+                <div class="flex justify-between">
+                    <button onclick="prevStep(3)" class="bg-gray-500 text-white p-2 rounded">Regresar</button>
+                    <button onclick="submitForm()" class="bg-green-500 text-white p-2 rounded">Enviar</button>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            function nextStep(currentStep) {
+                let valid = true;
+                if (currentStep === 1) {
+                    const empresa = document.getElementById('empresa').value;
+                    const email = document.getElementById('email').value;
+                    const telefono = document.getElementById('telefono').value;
+                    if (!empresa || !email || !telefono) {
+                        valid = false;
+                        alert('Por favor, completa todos los campos.');
+                    }
+                } else if (currentStep === 2) {
+                    const horas = document.getElementById('horas').value;
+                    const nanas = document.getElementById('nanas').value;
+                    if (!horas || !nanas) {
+                        valid = false;
+                        alert('Por favor, completa todos los campos.');
+                    }
+                }
+    
+                if (valid) {
+                    document.getElementById(`step${currentStep}`).classList.add('hidden');
+                    document.getElementById(`step${currentStep + 1}`).classList.remove('hidden');
+                }
+            }
+    
+            function prevStep(currentStep) {
+                document.getElementById(`step${currentStep}`).classList.add('hidden');
+                document.getElementById(`step${currentStep - 1}`).classList.remove('hidden');
+            }
+    
+            function submitForm() {
+                const empresa = document.getElementById('empresa').value;
+                const email = document.getElementById('email').value;
+                const telefono = document.getElementById('telefono').value;
+                const horas = document.getElementById('horas').value;
+                const nanas = document.getElementById('nanas').value;
+                const calle = document.getElementById('calle').value;
+                const numero = document.getElementById('numero').value;
+                const colonia = document.getElementById('colonia').value;
+                const ciudad = document.getElementById('ciudad').value;
+                const estado = document.getElementById('estado').value;
+                const cp = document.getElementById('cp').value;
+    
+                if (!empresa || !email || !telefono || !horas || !nanas || !calle || !numero || !colonia || !ciudad || !estado || !cp) {
+                    alert('Por favor, completa todos los campos.');
+                    return;
+                }
+    
+                // Aquí puedes enviar los datos a tu backend
+                const datos = {
+                    empresa,
+                    email,
+                    telefono,
+                    horas,
+                    nanas,
+                    direccion: {
+                        calle,
+                        numero,
+                        colonia,
+                        ciudad,
+                        estado,
+                        cp,
+                    },
+                };
+                console.log('Datos enviados:', datos);
+                alert('Formulario enviado con éxito!');
+            }
+        </script>
     </div>
 
     <!-- Testimonios -->
