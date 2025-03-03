@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nana's Clean - Servicios de Limpieza Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        @font-face {
+            font-family: 'Nexa Bold';
+            src: url('fonts/Nexa-Bold.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .nexa-bold {
+            font-family: 'Nexa Bold', sans-serif;
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #f97316;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .btn-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .check-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-item:hover .check-icon {
+            transform: scale(1.2);
+        }
+        
+        /* Typing animation for larger screens */
+        @media (min-width: 768px) {
+            .typing-animation {
+                overflow: hidden;
+                border-right: .15em solid #f97316;
+                white-space: nowrap;
+                margin: 0 auto;
+                animation: 
+                    typing 3.5s steps(40, end),
+                    blink-caret .75s step-end infinite;
+            }
+            
+            @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+            }
+            
+            @keyframes blink-caret {
+                from, to { border-color: transparent }
+                50% { border-color: #f97316 }
+            }
+        }
+        
+        /* Disable typing animation for mobile to prevent layout issues */
+        @media (max-width: 767px) {
+            .typing-animation {
+                border-right: none;
+            }
+        }
+        
+        /* Custom responsive adjustments */
+        @media (max-width: 640px) {
+            .hero-content {
+                padding: 0 16px;
+            }
+            
+            .hero-text {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+            
+            .feature-grid {
+                padding: 0 12px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar fixed top-0 left-0 w-full py-3 md:py-4 px-4 md:px-6 flex justify-between items-center shadow-md transition-all z-50">
+        <h1 class="text-xl md:text-2xl font-bold text-orange-500 animate__animated animate__fadeIn">
+            <span class="nexa-bold">Nana's<span class="text-orange-500">Clean</span></span>
+        </h1>
+        <ul class="hidden md:flex space-x-4 lg:space-x-6 text-gray-700">
+            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.1s">
+                <a href="#about" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Nuestra Empresa</a>
+            </li>
+            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.2s">
+                <a href="#services" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Servicios</a>
+            </li>
+            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.3s">
+                <a href="#quote" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Cotiza Ahora</a>
+            </li>
+            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.4s">
+                <a href="#testimonials" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Testimonios</a>
+            </li>
+            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.5s">
+                <a href="#contact" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Contáctanos</a>
+            </li>
+        </ul>
+        
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+            <button id="menuBtn" class="text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center transform translate-x-full transition-transform duration-300 ease-in-out">
+        <button id="closeMenuBtn" class="absolute top-4 right-6 text-gray-700 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <ul class="flex flex-col space-y-6 text-xl text-center">
+            <li><a href="#about" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Nuestra Empresa</a></li>
+            <li><a href="#services" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Servicios</a></li>
+            <li><a href="#quote" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Cotiza Ahora</a></li>
+            <li><a href="#testimonials" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Testimonios</a></li>
+            <li><a href="#contact" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Contáctanos</a></li>
+        </ul>
+    </div>
+
+<!-- Hero Section -->
+<section id="hero" class="relative w-full h-screen flex items-center justify-center text-white text-center">
+    <div class="absolute inset-0">
+        <img src="assets/slider.jpg" alt="Cleaning Service" class="w-full h-full object-cover animate__animated animate__fadeIn">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+    </div>
+    <div class="relative z-10 px-4 sm:px-6 max-w-lg md:max-w-2xl lg:max-w-3xl hero-content">
+        <h2 id="hero-text" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 animate__animated animate__fadeInUp nexa-bold typing-animation hero-text">
+            ¡Transforma tu espacio y encuentra la ayuda que necesitas!
+        </h2>
+        <p class="text-lg sm:text-xl mb-6 sm:mb-8 animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+            Servicios de limpieza profesionales adaptados a tus necesidades
+        </p>
+        <button class="mt-2 sm:mt-4 bg-orange-500 text-white py-2 sm:py-3 px-6 sm:px-8 rounded-lg shadow-lg text-base sm:text-lg btn-hover animate__animated animate__fadeInUp" style="animation-delay: 0.5s">
+            <span class="nexa-bold">Cotiza en 3 min!</span>
+        </button>
+    </div>
+</section>
+
+<style>
+    #hero {
+        min-height: 100vh; /* Asegura que la sección ocupe toda la altura de la pantalla */
+    }
+
+    .hero-content {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Responsividad */
+    @media (max-width: 640px) {
+        h2 {
+            font-size: 2rem;
+        }
+        p {
+            font-size: 1rem;
+        }
+    }
+
+    @media (min-width: 640px) {
+        h2 {
+            font-size: 3rem;
+        }
+        p {
+            font-size: 1.25rem;
+        }
+    }
+</style>
+
+        
+        <!-- Scroll down indicator -->
+        <div class="absolute bottom-8 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Certifications Full Width -->
+    <div class="w-full bg-white flex items-center justify-center py-8 sm:py-12" data-aos="fade-up" data-aos-duration="1000">
+        <div class="px-4 sm:px-6 w-full">
+            <img src="assets/repse.png" alt="REPSE y Trabajo" class="w-full h-auto max-w-5xl mx-auto">
+        </div>
+    </div>
+
+    <!-- Why Choose Us Section -->
+    <div id="about" class="flex flex-col justify-center items-center h-full w-full bg-white space-y-8 sm:space-y-12 py-12 sm:py-16">
+        <!-- Título centrado -->
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 text-center nexa-bold px-4" data-aos="fade-up">
+            ¿Por qué nosotros?
+        </h1>
+    
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-center max-w-5xl text-center px-4 sm:px-6 feature-grid">
+            <!-- Primera columna -->
+            <div class="space-y-6 sm:space-y-8">
+                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-right" data-aos-delay="100">
+                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
+                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
+                        Profesionalismo y experiencia – Personal capacitado para ofrecer un servicio de limpieza eficiente y confiable.
+                    </p>
+                </div>
+                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-right" data-aos-delay="200">
+                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
+                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
+                        Productos de calidad – Uso de productos y equipos adecuados para garantizar una limpieza profunda sin dañar superficies.
+                    </p>
+                </div>
+                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-right" data-aos-delay="300">
+                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
+                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
+                        Compromiso con la higiene y seguridad – Protocolos estrictos para asegurar un ambiente limpio y saludable.
+                    </p>
+                </div>
+            </div>
+    
+            <!-- Logo en el centro - Orden ajustado para mobile -->
+            <div class="flex justify-center py-6 sm:py-8 order-first md:order-none mb-4 md:mb-0" data-aos="zoom-in" data-aos-duration="1200">
+                <img src="assets/logo2.png" alt="Nanas Clean Logo" class="w-32 sm:w-40 md:w-48 hover:animate-pulse">
+            </div>
+    
+            <!-- Segunda columna -->
+            <div class="space-y-6 sm:space-y-8">
+                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-left" data-aos-delay="100">
+                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
+                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
+                        Productos de calidad – Uso de productos y equipos adecuados para garantizar una limpieza profunda sin dañar superficies.
+                    </p>
+                </div>
+                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-left" data-aos-delay="200">
+                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
+                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
+                        Servicio personalizado – Soluciones a medida para hogares, oficinas o espacios comerciales.
+                    </p>
+                </div>
+                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-left" data-aos-delay="300">
+                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
+                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
+                        Experiencia y confianza – Profesionales capacitados para brindar un servicio impecable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Image full width with parallax effect -->
+    <div class="w-full relative overflow-hidden h-200 sm:h-250 md:h-300" data-aos="fade-up">
+
+        <div class="absolute w-full h-full transform scale-110" id="parallaxImage">
+            <img src="assets/slice.png" alt="Servicios de limpieza" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                <h2 class="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold nexa-bold text-center px-4">Transformamos espacios</h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="w-full relative">
+        <!-- Imagen de ancho completo como separador -->
+        <div class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" style="height: 120px;">
+          <!-- Puedes ajustar la altura cambiando el valor en style="height: 120px;" -->
+        </div>
+        
+        <!-- Opcionalmente, puedes agregar un patrón superpuesto para más estilo -->
+        <div class="absolute inset-0 bg-opacity-20 bg-black" style="background-image: url(assets/slice.png);"></div>
+        
+
+      </div>
+
+    <!-- Services Section (Added for completeness) -->
+    <section id="services" class="py-12 sm:py-16 bg-white">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 nexa-bold" data-aos="fade-up">
+                Nuestros Servicios
+            </h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 bg-gray-200 relative">
+                        <div class="absolute inset-0 flex items-center justify-center bg-orange-500 bg-opacity-20">
+                            <svg class="w-16 h-16 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 nexa-bold">Limpieza Residencial</h3>
+                        <p class="text-gray-600 mb-4">Servicios de limpieza para apartamentos, casas y condominios. Mantenemos tu hogar impecable.</p>
+                        <a href="#quote" class="inline-block text-orange-500 font-semibold hover:underline">Cotizar ahora →</a>
+                    </div>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 bg-gray-200 relative">
+                        <div class="absolute inset-0 flex items-center justify-center bg-orange-500 bg-opacity-20">
+                            <svg class="w-16 h-16 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2-1a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V4a1 1 0 00-1-1H6z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 nexa-bold">Limpieza Comercial</h3>
+                        <p class="text-gray-600 mb-4">Soluciones de limpieza para oficinas, tiendas y espacios comerciales. Mejora la imagen de tu negocio.</p>
+                        <a href="#quote" class="inline-block text-orange-500 font-semibold hover:underline">Cotizar ahora →</a>
+                    </div>
+                </div>
+                
+                <!-- Service Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 bg-gray-200 relative">
+                        <div class="absolute inset-0 flex items-center justify-center bg-orange-500 bg-opacity-20">
+                            <svg class="w-16 h-16 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM13 14a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 nexa-bold">Servicios Especiales</h3>
+                        <p class="text-gray-600 mb-4">Limpieza profunda, post-construcción y eventos especiales. Servicios personalizados para tus necesidades.</p>
+                        <a href="#quote" class="inline-block text-orange-500 font-semibold hover:underline">Cotizar ahora →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+<!-- Testimonios -->
+<section class="bg-white text-black py-12">
+    <div class="max-w-5xl mx-auto px-4 text-center mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-black mb-2 animate__animated animate__fadeIn" style="font-family: 'Nexa Bold', sans-serif;">
+            Testimonios de nuestros clientes
+        </h1>
+        <div class="w-24 h-1 bg-orange-500 mx-auto mb-8 animate__animated animate__fadeIn animate__delay-1s"></div>
+        
+        <div class="relative mt-8">
+            <div class="testimonial-carousel flex overflow-x-auto snap-x snap-mandatory hide-scrollbar space-x-4 pb-6">
+                <!-- Primer testimonio -->
+                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="text-orange-500 text-5xl mb-4">"</div>
+                        <p class="italic text-gray-700">"Excelente servicio, muy profesionales y dedicados. ¡Recomendados!"</p>
+                        <div class="mt-4 flex items-center justify-center">
+                            <div class="flex text-orange-500 mb-2">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                        </div>
+                        <p class="font-bold text-gray-900">- María González</p>
+                    </div>
+                </div>
+                
+                <!-- Segundo testimonio -->
+                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="text-orange-500 text-5xl mb-4">"</div>
+                        <p class="italic text-gray-700">"¡La mejor empresa de limpieza! Puntuales y muy eficientes."</p>
+                        <div class="mt-4 flex items-center justify-center">
+                            <div class="flex text-orange-500 mb-2">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                        </div>
+                        <p class="font-bold text-gray-900">- Juan Pérez</p>
+                    </div>
+                </div>
+                
+                <!-- Tercer testimonio -->
+                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="text-orange-500 text-5xl mb-4">"</div>
+                        <p class="italic text-gray-700">"¡Gracias por el excelente servicio! ¡Mi casa quedó impecable!"</p>
+                        <div class="mt-4 flex items-center justify-center">
+                            <div class="flex text-orange-500 mb-2">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                        </div>
+                        <p class="font-bold text-gray-900">- Ana Rodríguez</p>
+                    </div>
+                </div>
+                
+                <!-- Cuarto testimonio -->
+                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="text-orange-500 text-5xl mb-4">"</div>
+                        <p class="italic text-gray-700">"Contrato sus servicios mensualmente y siempre es perfecto. Personal amable y profesional."</p>
+                        <div class="mt-4 flex items-center justify-center">
+                            <div class="flex text-orange-500 mb-2">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                        </div>
+                        <p class="font-bold text-gray-900">- Carlos Mendoza</p>
+                    </div>
+                </div>
+                
+                <!-- Quinto testimonio -->
+                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="text-orange-500 text-5xl mb-4">"</div>
+                        <p class="italic text-gray-700">"Súper recomendados para limpiezas de oficinas. Cumplen con todos los protocolos de seguridad."</p>
+                        <div class="mt-4 flex items-center justify-center">
+                            <div class="flex text-orange-500 mb-2">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                        </div>
+                        <p class="font-bold text-gray-900">- Laura Sánchez</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Flechas de navegación mejoradas -->
+            <button class="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white p-2 rounded-full shadow-lg focus:outline-none hover:bg-orange-600 transition-colors duration-300 z-10" id="prevBtn" aria-label="Anterior">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button class="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white p-2 rounded-full shadow-lg focus:outline-none hover:bg-orange-600 transition-colors duration-300 z-10" id="nextBtn" aria-label="Siguiente">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+            
+            <!-- Indicadores de posición -->
+            <div class="dots-container flex justify-center mt-6 space-x-2"></div>
+        </div>
+    </div>
+</section>
+
+
+<div class="w-full relative">
+    <!-- Imagen de ancho completo como separador -->
+    <div class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" style="height: 120px;">
+      <!-- Puedes ajustar la altura cambiando el valor en style="height: 120px;" -->
+    </div>
+    
+    <!-- Opcionalmente, puedes agregar un patrón superpuesto para más estilo -->
+    <div class="absolute inset-0 bg-opacity-20 bg-black" style="background-image: url(assets/slice.png);"></div>
+    
+
+  </div>
+
+
+<style>
+    .bg-nanas-clean {
+        background-image: url('assets/monos.png'); /* Cambia por tu imagen de fondo */
+        background-size: cover;
+        background-position: center;
+    }
+    body {
+        font-family: 'Nexa', sans-serif; /* Aplicar la fuente Nexa */
+        color: black; /* Color de texto negro */
+    }
+</style>
+
+
+<div class="bg-white flex items-center justify-center my-20"> <!-- Added my-8 for top and bottom margins -->
+    <div class="bg-nanas-clean p-8 rounded-lg shadow-lg w-full max-w-4xl text-black">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold">Cotiza tu Servicio de Limpieza</h1>
+            <div class="flex justify-center space-x-4 mt-4">
+                <span>Información Básica</span>
+                <span>Detalles del Servicio</span>
+                <span>Dirección</span>
+            </div>
+        </div>
+    
+        <!-- Paso 1: Información Básica -->
+        <div id="step1" class="step">
+            <h2 class="text-2xl font-bold mb-4">Información Básica</h2>
+            <div class="mb-4">
+                <label for="empresa" class="block text-sm font-medium mb-2">Nombre de la Empresa</label>
+                <input type="text" id="empresa" placeholder="Nombre de la Empresa" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
+                <input type="email" id="email" placeholder="Correo Electrónico" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="mb-4">
+                <label for="telefono" class="block text-sm font-medium mb-2">Número de Contacto</label>
+                <input type="tel" id="telefono" placeholder="Número de Contacto" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="flex justify-between">
+                <button disabled class="bg-gray-500 text-white p-2 rounded opacity-50 cursor-not-allowed">Regresar</button>
+                <button onclick="nextStep(1)" class="bg-blue-500 text-white p-2 rounded">Continuar</button>
+            </div>
+        </div>
+    
+        <!-- Paso 2: Detalles del Servicio -->
+        <div id="step2" class="step hidden">
+            <h2 class="text-2xl font-bold mb-4">Detalles del Servicio</h2>
+            <div class="mb-4">
+                <label for="horas" class="block text-sm font-medium mb-2">Horas de Servicio por Semana</label>
+                <input type="number" id="horas" placeholder="Horas por Semana" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="mb-4">
+                <label for="nanas" class="block text-sm font-medium mb-2">Cantidad de Nanas Requeridas</label>
+                <input type="number" id="nanas" placeholder="Número de Nanas" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="flex justify-between">
+                <button onclick="prevStep(2)" class="bg-gray-500 text-white p-2 rounded">Regresar</button>
+                <button onclick="nextStep(2)" class="bg-blue-500 text-white p-2 rounded">Continuar</button>
+            </div>
+        </div>
+    
+        <!-- Paso 3: Dirección -->
+        <div id="step3" class="step hidden">
+            <h2 class="text-2xl font-bold mb-4">Ingresa tu Dirección</h2>
+            <div class="mb-4">
+                <label for="calle" class="block text-sm font-medium mb-2">Calle</label>
+                <input type="text" id="calle" placeholder="Calle" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="mb-4">
+                <label for="numero" class="block text-sm font-medium mb-2">Número</label>
+                <input type="text" id="numero" placeholder="Número" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="mb-4">
+                <label for="colonia" class="block text-sm font-medium mb-2">Colonia</label>
+                <input type="text" id="colonia" placeholder="Colonia" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="mb-4">
+                <label for="ciudad" class="block text-sm font-medium mb-2">Ciudad</label>
+                <input type="text" id="ciudad" placeholder="Ciudad" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="mb-4">
+                <label for="estado" class="block text-sm font-medium mb-2">Estado</label>
+                <input type="text" id="estado" placeholder="Estado" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="mb-4">
+                <label for="cp" class="block text-sm font-medium mb-2">Código Postal</label>
+                <input type="text" id="cp" placeholder="Código Postal" class="w-full p-2 border rounded text-black">
+            </div>
+            <div class="flex justify-between">
+                <button onclick="prevStep(3)" class="bg-gray-500 text-white p-2 rounded">Regresar</button>
+                <button onclick="submitForm()" class="bg-green-500 text-white p-2 rounded">Enviar</button>
+            </div>
+        </div>
+    </div>
+    </div>
+<script>
+    function nextStep(currentStep) {
+        let valid = true;
+        if (currentStep === 1) {
+            const empresa = document.getElementById('empresa').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            if (!empresa || !email || !telefono) {
+                valid = false;
+                alert('Por favor, completa todos los campos.');
+            }
+        } else if (currentStep === 2) {
+            const horas = document.getElementById('horas').value;
+            const nanas = document.getElementById('nanas').value;
+            if (!horas || !nanas) {
+                valid = false;
+                alert('Por favor, completa todos los campos.');
+            }
+        }
+
+        if (valid) {
+            document.getElementById(`step${currentStep}`).classList.add('hidden');
+            document.getElementById(`step${currentStep + 1}`).classList.remove('hidden');
+        }
+    }
+
+    function prevStep(currentStep) {
+        document.getElementById(`step${currentStep}`).classList.add('hidden');
+        document.getElementById(`step${currentStep - 1}`).classList.remove('hidden');
+    }
+
+    function submitForm() {
+        const empresa = document.getElementById('empresa').value;
+        const email = document.getElementById('email').value;
+        const telefono = document.getElementById('telefono').value;
+        const horas = document.getElementById('horas').value;
+        const nanas = document.getElementById('nanas').value;
+        const calle = document.getElementById('calle').value;
+        const numero = document.getElementById('numero').value;
+        const colonia = document.getElementById('colonia').value;
+        const ciudad = document.getElementById('ciudad').value;
+        const estado = document.getElementById('estado').value;
+        const cp = document.getElementById('cp').value;
+
+        if (!empresa || !email || !telefono || !horas || !nanas || !calle || !numero || !colonia || !ciudad || !estado || !cp) {
+            alert('Por favor, completa todos los campos.');
+            return;
+        }
+
+        // Aquí puedes enviar los datos a tu backend
+        const datos = {
+            empresa,
+            email,
+            telefono,
+            horas,
+            nanas,
+            direccion: {
+                calle,
+                numero,
+                colonia,
+                ciudad,
+                estado,
+                cp,
+            },
+        };
+        console.log('Datos enviados:', datos);
+        alert('Formulario enviado con éxito!');
+    }
+</script>
+</body>
+
+
+
+<style>
+    /* Ocultar la barra de desplazamiento pero mantener la funcionalidad */
+    .hide-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;     /* Firefox */
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari, Opera */
+    }
+    
+    /* Estilo para los puntos indicadores activos */
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #e5e7eb;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .dot.active {
+        background-color: #f97316;
+        width: 12px;
+        height: 12px;
+    }
+    
+    /* Animación para aparición de testimonios */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate__fadeIn {
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .animate__delay-1s {
+        animation-delay: 0.2s;
+    }
+    
+    /* Hacer que las tarjetas sean más responsivas */
+    @media (max-width: 640px) {
+        .testimonial-carousel > div {
+            width: 85vw;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const carousel = document.querySelector('.testimonial-carousel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const testimonials = carousel.querySelectorAll('.testimonial-carousel > div');
+        const dotsContainer = document.querySelector('.dots-container');
+        
+        let currentIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        // Crear los indicadores de posición (dots)
+        testimonials.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = dotsContainer.querySelectorAll('.dot');
+        
+        // Función para ir a una diapositiva específica
+        function goToSlide(index) {
+            if (index < 0) index = testimonials.length - 1;
+            if (index >= testimonials.length) index = 0;
+            
+            currentIndex = index;
+            
+            // Calcular la posición de desplazamiento
+            const testimonialWidth = testimonials[0].offsetWidth;
+            const margin = parseInt(window.getComputedStyle(testimonials[0]).marginRight);
+            const scrollPosition = index * (testimonialWidth + margin);
+            
+            carousel.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+            
+            // Actualizar dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+            
+            // Activar animación de aparición
+            testimonials.forEach((testimonial, i) => {
+                const content = testimonial.querySelector('.animate__fadeIn');
+                if (i === currentIndex) {
+                    content.style.opacity = '0';
+                    setTimeout(() => {
+                        content.style.animation = 'none';
+                        void content.offsetWidth; // Forzar reflow
+                        content.style.animation = 'fadeIn 0.6s ease-out forwards';
+                    }, 50);
+                }
+            });
+        }
+        
+        // Botones de navegación
+        prevBtn.addEventListener('click', () => {
+            goToSlide(currentIndex - 1);
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            goToSlide(currentIndex + 1);
+        });
+        
+        // Soporte para gestos táctiles (swipe)
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        carousel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX + swipeThreshold < touchStartX) {
+                goToSlide(currentIndex + 1);
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                goToSlide(currentIndex - 1);
+            }
+        }
+        
+        // Detectar cambios de desplazamiento para actualizar los dots
+        carousel.addEventListener('scroll', () => {
+            const testimonialWidth = testimonials[0].offsetWidth;
+            const margin = parseInt(window.getComputedStyle(testimonials[0]).marginRight);
+            const scrollPosition = carousel.scrollLeft;
+            
+            // Calcular qué tarjeta está más visible
+            const newIndex = Math.round(scrollPosition / (testimonialWidth + margin));
+            
+            if (newIndex !== currentIndex && newIndex >= 0 && newIndex < testimonials.length) {
+                currentIndex = newIndex;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+        });
+        
+        // Auto slide cada 5 segundos
+        let autoSlideInterval = setInterval(() => {
+            goToSlide(currentIndex + 1);
+        }, 5000);
+        
+        // Pausar el auto-slide cuando el usuario interactúa
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            autoSlideInterval = setInterval(() => {
+                goToSlide(currentIndex + 1);
+            }, 5000);
+        });
+        
+        // Inicializar las animaciones
+        setTimeout(() => {
+            testimonials[0].querySelector('.animate__fadeIn').style.animation = 'fadeIn 0.6s ease-out forwards';
+        }, 100);
+        
+        // Asegurarse de que la primera tarjeta esté en su posición correcta en dispositivos móviles
+        if (window.innerWidth < 640) {
+            carousel.scrollTo(0, 0);
+        }
+    });
+</script>
+
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Inicializar AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+        
+        // Parallax effect
+        const parallaxImage = document.getElementById('parallaxImage');
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            if (parallaxImage) {
+                parallaxImage.style.transform = `translateY(${scrollPosition * 0.15}px) scale(1.1)`;
+            }
+        });
+    </script>
+<div class="bg-gray-100 flex flex-col min-h-screen">
+
+    <!-- Contenedor Principal -->
+    <div class="bg-white flex flex-col min-h-screen bg-cover bg-center" 
+        style="background-image: url('https://contractorsinsurance.ca/wp-content/uploads/2024/07/Featured-image-.jpg');">
+        
+        <!-- Footer -->
+        <footer class="relative bg-blue-900 text-white py-12 mt-auto">
+            
+           <!-- Tarjeta de Contacto (Ahora responsiva) -->
+<div class="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-white text-gray-800 p-6 rounded-lg shadow-lg max-w-4xl w-[95%] md:w-[85%] flex flex-col md:flex-row items-center md:justify-between text-center md:text-left mb-6">
+    
+    <div class="flex items-center space-x-3">
+        <img src="assets/logo2.png" alt="Logo" class="w-16 h-16 rounded-full">
+        <div>
+          
+        </div>
+    </div>
+    
+    <div class="mt-4 md:mt-0">
+        <p class="font-semibold">Llámanos</p>
+        <p class="text-lg font-bold text-blue-500">954 857 5807</p>
+    </div>
+    
+    <div class="mt-4 md:mt-0">
+        <p class="font-semibold">Ubicados en:</p>
+        <p class="text-sm md:text-base">261 N University Dr Plantation, FL 33324</p>
+    </div>
+</div>
+
+    
+            <!-- Contenido Principal del Footer -->
+            <div class="max-w-6xl mx-auto px-6 pt-24 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                
+                <!-- Explore -->
+                <div>
+                    <h3 class="font-semibold text-lg">Explorar</h3>
+                    <p class="mt-3 text-gray-300 text-sm md:text-base">
+                        Brindamos servicios de limpieza de alta calidad para escuelas, universidades, negocios e instituciones en Florida.
+                    </p>
+                    
+                    <!-- Redes Sociales -->
+                    <div class="flex justify-center md:justify-start space-x-4 mt-4">
+                        <a href="#" class="text-pink-500 text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-blue-500 text-2xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-green-500 text-2xl"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+    
+                <!-- Links -->
+                <div>
+                    <h3 class="font-semibold text-lg">Enlaces</h3>
+                    <ul class="mt-3 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Inicio</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Sobre Nosotros</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Servicios</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Contáctanos</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Servicios -->
+                <div>
+                    <h3 class="font-semibold text-lg">Servicios</h3>
+                    <ul class="mt-3 space-y-2">
+                        <li>✔ Limpieza Comercial</li>
+                        <li>✔ Limpieza Post Construcción</li>
+                        <li>✔ Reparación de Aire Acondicionado</li>
+                        <li>✔ Pintura Residencial y Comercial</li>
+                        <li>✔ Encerado de Pisos</li>
+                        <li>✔ Limpieza de Alfombras</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Copyright -->
+            <div class="text-center text-gray-400 text-sm mt-8 px-4">
+                2025 © Website diseñado y desarrollado por <span class="font-semibold text-white">Fantazy Labz</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- FontAwesome para iconos de redes sociales -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- FontAwesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    
+
+    
+</body>
+</html>
+
