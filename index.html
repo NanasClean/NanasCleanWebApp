@@ -533,159 +533,191 @@
     }
 </style>
 
+<style>
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #2563eb;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #2563eb;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  </style>
 
-<div class="bg-white flex items-center justify-center my-20"> <!-- Added my-8 for top and bottom margins -->
-    <div class="bg-nanas-clean p-8 rounded-lg shadow-lg w-full max-w-4xl text-black">
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold">Cotiza tu Servicio de Limpieza</h1>
-            <div class="flex justify-center space-x-4 mt-4">
-                <span>Información Básica</span>
-                <span>Detalles del Servicio</span>
-                <span>Dirección</span>
-            </div>
-        </div>
-    
-        <!-- Paso 1: Información Básica -->
-        <div id="step1" class="step">
-            <h2 class="text-2xl font-bold mb-4">Información Básica</h2>
-            <div class="mb-4">
-                <label for="empresa" class="block text-sm font-medium mb-2">Nombre de la Empresa</label>
-                <input type="text" id="empresa" placeholder="Nombre de la Empresa" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="mb-4">
-                <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
-                <input type="email" id="email" placeholder="Correo Electrónico" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="mb-4">
-                <label for="telefono" class="block text-sm font-medium mb-2">Número de Contacto</label>
-                <input type="tel" id="telefono" placeholder="Número de Contacto" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="flex justify-between">
-                <button disabled class="bg-gray-500 text-white p-2 rounded opacity-50 cursor-not-allowed">Regresar</button>
-                <button onclick="nextStep(1)" class="bg-blue-500 text-white p-2 rounded">Continuar</button>
-            </div>
-        </div>
-    
-        <!-- Paso 2: Detalles del Servicio -->
-        <div id="step2" class="step hidden">
-            <h2 class="text-2xl font-bold mb-4">Detalles del Servicio</h2>
-            <div class="mb-4">
-                <label for="horas" class="block text-sm font-medium mb-2">Horas de Servicio por Semana</label>
-                <input type="number" id="horas" placeholder="Horas por Semana" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="mb-4">
-                <label for="nanas" class="block text-sm font-medium mb-2">Cantidad de Nanas Requeridas</label>
-                <input type="number" id="nanas" placeholder="Número de Nanas" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="flex justify-between">
-                <button onclick="prevStep(2)" class="bg-gray-500 text-white p-2 rounded">Regresar</button>
-                <button onclick="nextStep(2)" class="bg-blue-500 text-white p-2 rounded">Continuar</button>
-            </div>
-        </div>
-    
-        <!-- Paso 3: Dirección -->
-        <div id="step3" class="step hidden">
-            <h2 class="text-2xl font-bold mb-4">Ingresa tu Dirección</h2>
-            <div class="mb-4">
-                <label for="calle" class="block text-sm font-medium mb-2">Calle</label>
-                <input type="text" id="calle" placeholder="Calle" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="mb-4">
-                <label for="numero" class="block text-sm font-medium mb-2">Número</label>
-                <input type="text" id="numero" placeholder="Número" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="mb-4">
-                <label for="colonia" class="block text-sm font-medium mb-2">Colonia</label>
-                <input type="text" id="colonia" placeholder="Colonia" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="mb-4">
-                <label for="ciudad" class="block text-sm font-medium mb-2">Ciudad</label>
-                <input type="text" id="ciudad" placeholder="Ciudad" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="mb-4">
-                <label for="estado" class="block text-sm font-medium mb-2">Estado</label>
-                <input type="text" id="estado" placeholder="Estado" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="mb-4">
-                <label for="cp" class="block text-sm font-medium mb-2">Código Postal</label>
-                <input type="text" id="cp" placeholder="Código Postal" class="w-full p-2 border rounded text-black">
-            </div>
-            <div class="flex justify-between">
-                <button onclick="prevStep(3)" class="bg-gray-500 text-white p-2 rounded">Regresar</button>
-                <button onclick="submitForm()" class="bg-green-500 text-white p-2 rounded">Enviar</button>
-            </div>
-        </div>
+<div class="bg-white-100 min-h-screen flex items-center justify-center p-4 mb-20">
+
+  <div class="max-w-2xl w-full bg-white rounded-lg shadow-lg p-6">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-blue-600">Cotizador Nanas Clean</h1>
+      <p class="text-gray-600 mt-2">Calcula el costo de nuestros servicios de limpieza profesional</p>
     </div>
-    </div>
-<script>
-    function nextStep(currentStep) {
-        let valid = true;
-        if (currentStep === 1) {
-            const empresa = document.getElementById('empresa').value;
-            const email = document.getElementById('email').value;
-            const telefono = document.getElementById('telefono').value;
-            if (!empresa || !email || !telefono) {
-                valid = false;
-                alert('Por favor, completa todos los campos.');
-            }
-        } else if (currentStep === 2) {
-            const horas = document.getElementById('horas').value;
-            const nanas = document.getElementById('nanas').value;
-            if (!horas || !nanas) {
-                valid = false;
-                alert('Por favor, completa todos los campos.');
-            }
-        }
 
-        if (valid) {
-            document.getElementById(`step${currentStep}`).classList.add('hidden');
-            document.getElementById(`step${currentStep + 1}`).classList.remove('hidden');
-        }
+    <form id="cotizadorForm" class="space-y-6">
+      <!-- Selector de Servicio -->
+      <div>
+        <label for="servicio" class="block text-gray-700 font-medium mb-2">Tipo de Servicio</label>
+        <select 
+          id="servicio" 
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="limpieza-basica" data-precio="150">Limpieza Básica ($150/hora)</option>
+          <option value="limpieza-profunda" data-precio="200">Limpieza Profunda ($200/hora)</option>
+          <option value="limpieza-especial" data-precio="250">Limpieza Especial ($250/hora)</option>
+        </select>
+        <p class="text-sm text-gray-500 mt-1">Seleccione el tipo de servicio que necesita</p>
+      </div>
+
+      <!-- Range para Horas por Semana -->
+      <div>
+        <label for="horasSemana" class="block text-gray-700 font-medium mb-2">
+          Horas por Semana: <span id="horasValue" class="font-bold">10</span>
+        </label>
+        <div class="relative">
+          <input
+            type="range"
+            id="horasSemana"
+            min="1"
+            max="40"
+            value="10"
+            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+          />
+          <div class="w-full flex justify-between text-xs text-gray-500 px-1 mt-1">
+            <span>1</span>
+            <span>10</span>
+            <span>20</span>
+            <span>30</span>
+            <span>40</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entrada de texto para Número de Nanas -->
+      <div>
+        <label for="numNanas" class="block text-gray-700 font-medium mb-2">Número de Nanas</label>
+        <input
+          type="number"
+          id="numNanas"
+          min="1"
+          max="10"
+          value="1"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Datos de Contacto -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="nombreEmpresa" class="block text-gray-700 font-medium mb-2">Nombre de la Empresa</label>
+          <input
+            type="text"
+            id="nombreEmpresa"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Ingrese el nombre de su empresa"
+          />
+        </div>
+        <div>
+          <label for="correo" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
+          <input
+            type="email"
+            id="correo"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="ejemplo@empresa.com"
+          />
+        </div>
+      </div>
+
+      <!-- Resumen de Cotización -->
+      <div class="bg-blue-50 p-4 rounded-lg">
+        <h2 class="text-xl font-bold text-blue-700 mb-2">Resumen de Cotización</h2>
+        <div class="grid grid-cols-2 gap-2">
+          <p class="text-gray-600">Precio por hora:</p>
+          <p id="precioHora" class="text-gray-800 font-medium text-right">$150</p>
+          
+          <p class="text-gray-600">Horas por semana:</p>
+          <p id="horasSemanaResumen" class="text-gray-800 font-medium text-right">10</p>
+          
+          <p class="text-gray-600">Número de nanas:</p>
+          <p id="numNanasResumen" class="text-gray-800 font-medium text-right">1</p>
+          
+          <p class="text-gray-600 font-bold">Total semanal:</p>
+          <p id="totalCotizacion" class="text-blue-600 font-bold text-right text-xl">$1,500</p>
+        </div>
+      </div>
+
+      <!-- Botón de Solicitar Cotización -->
+      <button 
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
+      >
+        Solicitar Cotización Detallada
+      </button>
+    </form>
+  </div>
+  </div>
+</div>
+
+  <script>
+    // Elementos del DOM
+    const servicioSelect = document.getElementById('servicio');
+    const horasRange = document.getElementById('horasSemana');
+    const horasValue = document.getElementById('horasValue');
+    const numNanasInput = document.getElementById('numNanas');
+    const precioHoraElement = document.getElementById('precioHora');
+    const horasSemanaResumen = document.getElementById('horasSemanaResumen');
+    const numNanasResumen = document.getElementById('numNanasResumen');
+    const totalCotizacion = document.getElementById('totalCotizacion');
+    const cotizadorForm = document.getElementById('cotizadorForm');
+
+    // Función para actualizar la cotización
+    function actualizarCotizacion() {
+      const selectedOption = servicioSelect.options[servicioSelect.selectedIndex];
+      const precioHora = parseInt(selectedOption.getAttribute('data-precio'));
+      const horas = parseInt(horasRange.value);
+      const nanas = parseInt(numNanasInput.value);
+      
+      // Actualizar los valores mostrados
+      horasValue.textContent = horas;
+      precioHoraElement.textContent = `$${precioHora}`;
+      horasSemanaResumen.textContent = horas;
+      numNanasResumen.textContent = nanas;
+      
+      // Calcular y mostrar el total
+      const total = precioHora * horas * nanas;
+      totalCotizacion.textContent = `$${total.toLocaleString()}`;
     }
 
-    function prevStep(currentStep) {
-        document.getElementById(`step${currentStep}`).classList.add('hidden');
-        document.getElementById(`step${currentStep - 1}`).classList.remove('hidden');
-    }
+    // Event listeners
+    servicioSelect.addEventListener('change', actualizarCotizacion);
+    horasRange.addEventListener('input', actualizarCotizacion);
+    numNanasInput.addEventListener('input', actualizarCotizacion);
+    
+    // Prevenir envío del formulario y mostrar resumen
+    cotizadorForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const nombreEmpresa = document.getElementById('nombreEmpresa').value;
+      const correo = document.getElementById('correo').value;
+      
+      if (!nombreEmpresa || !correo) {
+        alert('Por favor complete todos los campos obligatorios.');
+        return;
+      }
+      
+      alert('¡Cotización enviada! Nos pondremos en contacto con usted pronto.');
+    });
 
-    function submitForm() {
-        const empresa = document.getElementById('empresa').value;
-        const email = document.getElementById('email').value;
-        const telefono = document.getElementById('telefono').value;
-        const horas = document.getElementById('horas').value;
-        const nanas = document.getElementById('nanas').value;
-        const calle = document.getElementById('calle').value;
-        const numero = document.getElementById('numero').value;
-        const colonia = document.getElementById('colonia').value;
-        const ciudad = document.getElementById('ciudad').value;
-        const estado = document.getElementById('estado').value;
-        const cp = document.getElementById('cp').value;
+    // Inicializar la cotización
+    actualizarCotizacion();
+  </script>
 
-        if (!empresa || !email || !telefono || !horas || !nanas || !calle || !numero || !colonia || !ciudad || !estado || !cp) {
-            alert('Por favor, completa todos los campos.');
-            return;
-        }
-
-        // Aquí puedes enviar los datos a tu backend
-        const datos = {
-            empresa,
-            email,
-            telefono,
-            horas,
-            nanas,
-            direccion: {
-                calle,
-                numero,
-                colonia,
-                ciudad,
-                estado,
-                cp,
-            },
-        };
-        console.log('Datos enviados:', datos);
-        alert('Formulario enviado con éxito!');
-    }
-</script>
 </body>
 
 
