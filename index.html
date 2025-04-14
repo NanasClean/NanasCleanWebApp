@@ -4,47 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nana's Clean - Servicios de Limpieza Profesional</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <style>
-        @font-face {
-            font-family: 'Nexa Bold';
-            src: url('fonts/Nexa-Bold.woff2') format('woff2');
-            font-weight: bold;
-            font-style: normal;
-            font-display: swap;
+        /* Custom Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #0d6efd;
+            --secondary: #ff6b35;
+            --dark: #343a40;
+            --light: #f8f9fa;
         }
         
-        html {
-            scroll-behavior: smooth;
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
         }
         
-        .nexa-bold {
-            font-family: 'Nexa Bold', sans-serif;
-        }
-        
+        /* Navbar Styles */
         .navbar {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            padding: 1rem 0;
         }
         
         .navbar.scrolled {
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            background-color: white !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.7rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .navbar-brand span {
+            color: var(--secondary);
         }
         
         .nav-link {
+            font-weight: 500;
             position: relative;
+            margin: 0 10px;
         }
         
         .nav-link::after {
             content: '';
             position: absolute;
+            bottom: 0;
+            left: 0;
             width: 0;
             height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #f97316;
+            background-color: var(--secondary);
             transition: width 0.3s ease;
         }
         
@@ -52,998 +69,1339 @@
             width: 100%;
         }
         
-        .btn-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            text-align: center;
         }
         
-        .btn-hover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
         }
         
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Features Cards */
         .feature-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Services Section */
+        .service-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         
-        .check-icon {
+        .service-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .service-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonial-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 5rem 0;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
+            height: 100%;
+            position: relative;
         }
         
-        .feature-item:hover .check-icon {
-            transform: scale(1.2);
+        .testimonial-card:hover {
+            transform: translateY(-10px);
         }
         
-        /* Typing animation for larger screens */
-        @media (min-width: 768px) {
-            .typing-animation {
-                overflow: hidden;
-                border-right: .15em solid #f97316;
-                white-space: nowrap;
-                margin: 0 auto;
-                animation: 
-                    typing 3.5s steps(40, end),
-                    blink-caret .75s step-end infinite;
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--secondary);
+            opacity: 0.2;
+            font-family: serif;
+        }
+        
+        .testimonial-rating {
+            color: #ffc107;
+            margin-top: 1rem;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        
+        .client-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        /* Quote Calculator Section */
+        .calculator-section {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            margin: 5rem auto;
+        }
+        
+        .calculator-form label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quote-result {
+            background: linear-gradient(135deg, var(--primary) 0%, #0b5ed7 100%);
+            padding: 2rem;
+            color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .result-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0b5ed7 100%);
+            padding: 5rem 0;
+            color: white;
+            text-align: center;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo span {
+            color: var(--secondary);
+        }
+        
+        .footer-links h5 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright-bar {
+            padding-top: 1.5rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background: var(--primary);
+            border-color: var(--primary);
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #0b5ed7;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(13, 110, 253, 0.2);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #ff5721;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.2);
+        }
+        
+        .btn-outline-light {
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Animations and Transitions */
+        .section-heading {
+            position: relative;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .center-heading::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Range input styling */
+        .range-container {
+            position: relative;
+            padding-bottom: 25px;
+        }
+        
+        .custom-range {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #e9ecef;
+            outline: none;
+        }
+        
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .custom-range::-webkit-slider-thumb:hover {
+            box-shadow: 0 0 0 8px rgba(13, 110, 253, 0.2);
+        }
+        
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+        
+        /* Counter Animation */
+        .counter-box {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .counter-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .counter-label {
+            font-size: 1rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        /* Certifications */
+        .certifications {
+            background-color: white;
+            padding: 3rem 0;
+        }
+        
+        .certification-logo {
+            height: 70px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .certification-logo:hover {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
             }
-            
-            @keyframes typing {
-                from { width: 0 }
-                to { width: 100% }
+            .navbar-collapse {
+                background: white;
+                padding: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                margin-top: 1rem;
             }
-            
-            @keyframes blink-caret {
-                from, to { border-color: transparent }
-                50% { border-color: #f97316 }
+            .nav-link::after {
+                bottom: -3px;
             }
         }
         
-        /* Disable typing animation for mobile to prevent layout issues */
-        @media (max-width: 767px) {
-            .typing-animation {
-                border-right: none;
-            }
-        }
-        
-        /* Custom responsive adjustments */
-        @media (max-width: 640px) {
-            .hero-content {
-                padding: 0 16px;
-            }
-            
-            .hero-text {
+        @media (max-width: 768px) {
+            .hero h1 {
                 font-size: 2rem;
-                line-height: 1.2;
             }
-            
-            .feature-grid {
-                padding: 0 12px;
+            .section-heading {
+                font-size: 1.8rem;
+            }
+            .quote-result {
+                margin-top: 2rem;
+                border-radius: 8px;
             }
         }
     </style>
 </head>
-<body class="bg-white">
+<body>
     <!-- Navbar -->
-    <nav id="navbar" class="navbar fixed top-0 left-0 w-full py-3 md:py-4 px-4 md:px-6 flex justify-between items-center shadow-md transition-all z-50">
-        <h1 class="text-xl md:text-2xl font-bold text-orange-500 animate__animated animate__fadeIn">
-            <span class="nexa-bold">Nana's<span class="text-orange-500">Clean</span></span>
-        </h1>
-        <ul class="hidden md:flex space-x-4 lg:space-x-6 text-gray-700">
-            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.1s">
-                <a href="#about" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Nuestra Empresa</a>
-            </li>
-            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.2s">
-                <a href="#services" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Servicios</a>
-            </li>
-            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.3s">
-                <a href="#quote" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Cotiza Ahora</a>
-            </li>
-            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.4s">
-                <a href="#testimonials" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Testimonios</a>
-            </li>
-            <li class="animate__animated animate__fadeInDown" style="animation-delay: 0.5s">
-                <a href="#contact" class="nav-link hover:text-orange-500 nexa-bold text-sm lg:text-base">Contáctanos</a>
-            </li>
-        </ul>
-        
-        <!-- Mobile menu button -->
-        <div class="md:hidden">
-            <button id="menuBtn" class="text-gray-700 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#">Nana's<span>Clean</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Nuestra Empresa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#calculator">Cotizador</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contacto</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center transform translate-x-full transition-transform duration-300 ease-in-out">
-        <button id="closeMenuBtn" class="absolute top-4 right-6 text-gray-700 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        <ul class="flex flex-col space-y-6 text-xl text-center">
-            <li><a href="#about" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Nuestra Empresa</a></li>
-            <li><a href="#services" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Servicios</a></li>
-            <li><a href="#quote" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Cotiza Ahora</a></li>
-            <li><a href="#testimonials" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Testimonios</a></li>
-            <li><a href="#contact" class="block py-2 text-gray-700 hover:text-orange-500 nexa-bold">Contáctanos</a></li>
-        </ul>
-    </div>
 
-<!-- Hero Section -->
-<section id="hero" class="relative w-full h-screen flex items-center justify-center text-white text-center">
-    <div class="absolute inset-0">
-        <img src="assets/slider.jpg" alt="Cleaning Service" class="w-full h-full object-cover animate__animated animate__fadeIn">
-        <div class="absolute inset-0 bg-black opacity-40"></div>
-    </div>
-    <div class="relative z-10 px-4 sm:px-6 max-w-lg md:max-w-2xl lg:max-w-3xl hero-content">
-        <h2 id="hero-text" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 animate__animated animate__fadeInUp nexa-bold typing-animation hero-text">
-            ¡Transforma tu espacio y encuentra la ayuda que necesitas!
-        </h2>
-        <p class="text-lg sm:text-xl mb-6 sm:mb-8 animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
-            Servicios de limpieza profesionales adaptados a tus necesidades
-        </p>
-        <button class="mt-2 sm:mt-4 bg-orange-500 text-white py-2 sm:py-3 px-6 sm:px-8 rounded-lg shadow-lg text-base sm:text-lg btn-hover animate__animated animate__fadeInUp" style="animation-delay: 0.5s">
-            <span class="nexa-bold">Cotiza en 3 min!</span>
-        </button>
-    </div>
-</section>
-
-<style>
-    #hero {
-        min-height: 100vh; /* Asegura que la sección ocupe toda la altura de la pantalla */
-    }
-
-    .hero-content {
-        max-width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Responsividad */
-    @media (max-width: 640px) {
-        h2 {
-            font-size: 2rem;
-        }
-        p {
-            font-size: 1rem;
-        }
-    }
-
-    @media (min-width: 640px) {
-        h2 {
-            font-size: 3rem;
-        }
-        p {
-            font-size: 1.25rem;
-        }
-    }
-</style>
-
-        
-        <!-- Scroll down indicator -->
-        <div class="absolute bottom-8 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Certifications Full Width -->
-    <div class="w-full bg-white flex items-center justify-center py-8 sm:py-12" data-aos="fade-up" data-aos-duration="1000">
-        <div class="px-4 sm:px-6 w-full">
-            <img src="assets/repse.png" alt="REPSE y Trabajo" class="w-full h-auto max-w-5xl mx-auto">
-        </div>
-    </div>
-
-    <!-- Why Choose Us Section -->
-    <div id="about" class="flex flex-col justify-center items-center h-full w-full bg-white space-y-8 sm:space-y-12 py-12 sm:py-16">
-        <!-- Título centrado -->
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 text-center nexa-bold px-4" data-aos="fade-up">
-            ¿Por qué nosotros?
-        </h1>
-    
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-center max-w-5xl text-center px-4 sm:px-6 feature-grid">
-            <!-- Primera columna -->
-            <div class="space-y-6 sm:space-y-8">
-                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-right" data-aos-delay="100">
-                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
-                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
-                        Profesionalismo y experiencia – Personal capacitado para ofrecer un servicio de limpieza eficiente y confiable.
-                    </p>
-                </div>
-                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-right" data-aos-delay="200">
-                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
-                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
-                        Productos de calidad – Uso de productos y equipos adecuados para garantizar una limpieza profunda sin dañar superficies.
-                    </p>
-                </div>
-                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-right" data-aos-delay="300">
-                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
-                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
-                        Compromiso con la higiene y seguridad – Protocolos estrictos para asegurar un ambiente limpio y saludable.
-                    </p>
-                </div>
-            </div>
-    
-            <!-- Logo en el centro - Orden ajustado para mobile -->
-            <div class="flex justify-center py-6 sm:py-8 order-first md:order-none mb-4 md:mb-0" data-aos="zoom-in" data-aos-duration="1200">
-                <img src="assets/logo2.png" alt="Nanas Clean Logo" class="w-32 sm:w-40 md:w-48 hover:animate-pulse">
-            </div>
-    
-            <!-- Segunda columna -->
-            <div class="space-y-6 sm:space-y-8">
-                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-left" data-aos-delay="100">
-                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
-                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
-                        Productos de calidad – Uso de productos y equipos adecuados para garantizar una limpieza profunda sin dañar superficies.
-                    </p>
-                </div>
-                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-left" data-aos-delay="200">
-                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
-                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
-                        Servicio personalizado – Soluciones a medida para hogares, oficinas o espacios comerciales.
-                    </p>
-                </div>
-                <div class="flex items-start space-x-3 feature-item feature-card p-3 sm:p-4 rounded-lg" data-aos="fade-left" data-aos-delay="300">
-                    <span class="text-orange-500 text-xl sm:text-2xl check-icon flex-shrink-0">✔</span>
-                    <p class="text-gray-700 text-xs sm:text-sm md:text-base nexa-bold text-left">
-                        Experiencia y confianza – Profesionales capacitados para brindar un servicio impecable.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Image full width with parallax effect -->
-    <div class="w-full relative overflow-hidden h-200 sm:h-250 md:h-300" data-aos="fade-up">
-
-        <div class="absolute w-full h-full transform scale-110" id="parallaxImage">
-            <img src="assets/slice.png" alt="Servicios de limpieza" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                <h2 class="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold nexa-bold text-center px-4">Transformamos espacios</h2>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="w-full relative">
-        <!-- Imagen de ancho completo como separador -->
-        <div class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" style="height: 120px;">
-          <!-- Puedes ajustar la altura cambiando el valor en style="height: 120px;" -->
-        </div>
-        
-        <!-- Opcionalmente, puedes agregar un patrón superpuesto para más estilo -->
-        <div class="absolute inset-0 bg-opacity-20 bg-black" style="background-image: url(assets/slice.png);"></div>
-        
-
-      </div>
-
-    <!-- Services Section (Added for completeness) -->
-    <section id="services" class="py-12 sm:py-16 bg-white">
-        <div class="container mx-auto px-4 sm:px-6">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 nexa-bold" data-aos="fade-up">
-                Nuestros Servicios
-            </h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <!-- Service Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                    <div class="h-48 bg-gray-200 relative">
-                        <div class="absolute inset-0 flex items-center justify-center bg-orange-500 bg-opacity-20">
-                            <svg class="w-16 h-16 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3 nexa-bold">Limpieza Residencial</h3>
-                        <p class="text-gray-600 mb-4">Servicios de limpieza para apartamentos, casas y condominios. Mantenemos tu hogar impecable.</p>
-                        <a href="#quote" class="inline-block text-orange-500 font-semibold hover:underline">Cotizar ahora →</a>
-                    </div>
-                </div>
-                
-                <!-- Service Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-                    <div class="h-48 bg-gray-200 relative">
-                        <div class="absolute inset-0 flex items-center justify-center bg-orange-500 bg-opacity-20">
-                            <svg class="w-16 h-16 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2-1a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V4a1 1 0 00-1-1H6z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3 nexa-bold">Limpieza Comercial</h3>
-                        <p class="text-gray-600 mb-4">Soluciones de limpieza para oficinas, tiendas y espacios comerciales. Mejora la imagen de tu negocio.</p>
-                        <a href="#quote" class="inline-block text-orange-500 font-semibold hover:underline">Cotizar ahora →</a>
-                    </div>
-                </div>
-                
-                <!-- Service Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="300">
-                    <div class="h-48 bg-gray-200 relative">
-                        <div class="absolute inset-0 flex items-center justify-center bg-orange-500 bg-opacity-20">
-                            <svg class="w-16 h-16 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM13 14a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3 nexa-bold">Servicios Especiales</h3>
-                        <p class="text-gray-600 mb-4">Limpieza profunda, post-construcción y eventos especiales. Servicios personalizados para tus necesidades.</p>
-                        <a href="#quote" class="inline-block text-orange-500 font-semibold hover:underline">Cotizar ahora →</a>
+    <!-- Hero Section -->
+    <section class="hero d-flex align-items-center" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8 hero-content text-center text-white" data-aos="fade-up">
+                    <h1 class="mb-4">¡Transforma tu espacio con expertos en limpieza!</h1>
+                    <p class="lead mb-5">Servicios de limpieza profesionales adaptados a cada necesidad. Garantizamos calidad y satisfacción.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="#calculator" class="btn btn-secondary btn-lg">Cotiza en 3 minutos</a>
+                        <a href="#services" class="btn btn-outline-light btn-lg">Conoce nuestros servicios</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Certifications -->
+    <section class="certifications">
+        <div class="container">
+            <div class="row align-items-center justify-content-center" data-aos="fade-up">
+                <div class="col-6 col-md-3 text-center mb-4 mb-md-0">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMmEjcpSmQpbh-wkRfIxewvx4c1qfBaUlrTg5-6E958zZwl-ISnQ670IoALzH2m6dDfH8&usqp=CAU" alt="IIRC Certified" class="certification-logo">
+                </div>
+                <div class="col-6 col-md-3 text-center mb-4 mb-md-0">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1kEOBEjp6zukp2vXcD7ynD3sIUJGNYR1iYg&s" alt="Green Seal" class="certification-logo">
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrUuw6AC1F6l8LycKBf_V8k4dgXEc3BItYHw&s" alt="ISO 9001" class="certification-logo">
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <img src="https://repse.stps.gob.mx/assets/img/E_REPSE_HOME.png" alt="REPSE Certificado" class="certification-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                    <h2 class="section-heading">¿Por qué elegir <span class="text-primary">Nana's</span><span class="text-secondary">Clean</span>?</h2>
+                    <p class="lead mb-4">En Nana's Clean nos distinguimos por ofrecer un servicio premium con personal altamente capacitado y comprometido con la excelencia.</p>
+                    
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="me-3 text-primary">
+                            <i class="fas fa-check-circle fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5>Profesionalismo y experiencia</h5>
+                            <p class="text-muted">Personal capacitado para ofrecer un servicio de limpieza eficiente y confiable.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="me-3 text-primary">
+                            <i class="fas fa-star fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5>Productos de calidad</h5>
+                            <p class="text-muted">Utilizamos productos ecológicos de alta calidad que garantizan resultados excepcionales.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start">
+                        <div class="me-3 text-primary">
+                            <i class="fas fa-shield-alt fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5>Compromiso con la higiene</h5>
+                            <p class="text-muted">Implementamos protocolos estrictos para asegurar un ambiente limpio y saludable.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Professional Cleaning Service" class="img-fluid rounded-3 shadow-lg">
+                        <div class="position-absolute bottom-0 end-0 p-4 bg-white rounded-3 shadow-lg m-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 10.8889C21 13.9823 19.2087 16.7564 16.5 18.2949V22L13.4444 19.7778H12C7.02944 19.7778 3 15.7484 3 10.7778C3 5.80725 7.02944 1.77783 12 1.77783C16.9706 1.77783 21 5.80725 21 10.7778V10.8889Z" fill="#0d6efd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">100% Satisfacción garantizada</h6>
+                                    <p class="mb-0 small text-muted">O te devolvemos tu dinero</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="bg-light py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-heading center-heading mx-auto">Beneficios de nuestro servicio</h2>
+                <p class="lead text-muted">Descubre por qué somos la mejor opción en servicios de limpieza</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card card border-0 p-4 text-center h-100">
+                        <div class="card-body">
+                            <div class="feature-icon mb-4">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h4 class="mb-3">Ahorro de tiempo</h4>
+                            <p class="text-muted">Dedica tu tiempo a lo que realmente importa mientras nosotros nos encargamos de la limpieza.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card card border-0 p-4 text-center h-100">
+                        <div class="card-body">
+                            <div class="feature-icon mb-4">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4 class="mb-3">Personal confiable</h4>
+                            <p class="text-muted">Nuestro equipo está formado por profesionales capacitados y verificados para tu seguridad.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card card border-0 p-4 text-center h-100">
+                        <div class="card-body">
+                            <div class="feature-icon mb-4">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h4 class="mb-3">Productos ecológicos</h4>
+                            <p class="text-muted">Utilizamos productos respetuosos con el medio ambiente y seguros para tu familia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Counter -->
+    <section class="py-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="counter-box">
+                        <div class="counter-value" data-count="850">0</div>
+                        <div class="counter-label">Clientes Satisfechos</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="counter-box">
+                        <div class="counter-value" data-count="15">0</div>
+                        <div class="counter-label">Años de Experiencia</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="counter-box">
+                        <div class="counter-value" data-count="120">0</div>
+                        <div class="counter-label">Profesionales</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="counter-box">
+                        <div class="counter-value" data-count="25000">0</div>
+                        <div class="counter-label">m² Limpiados</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-heading center-heading mx-auto">Nuestros Servicios</h2>
+                <p class="lead text-muted">Soluciones personalizadas para cada necesidad</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card card border-0 h-100">
+                        <img src="https://www.trusens.com/contentassets/54d1536792d4425a99ed5b20ff434883/cleaningessentials.jpg?width=1253&height=836 class="card-img-top" alt="Limpieza Residencial">
+                        <div class="card-body">
+                            <h4 class="card-title mb-3">Limpieza Residencial</h4>
+                            <p class="card-text text-muted">Mantenemos tu hogar impecable y libre de gérmenes. Personalizamos el servicio según tus necesidades específicas.</p>
+                            <div class="mt-auto pt-3">
+                                <a href="#calculator" class="btn btn-outline-primary">Cotizar ahora <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card card border-0 h-100">
+                        <img src="https://www.quickshine.com.mx/_next/image?url=%2FL3.png&w=3840&q=60" class="card-img-top" alt="Limpieza Comercial">
+                        <div class="card-body">
+                            <h4 class="card-title mb-3">Limpieza Comercial</h4>
+                            <p class="card-text text-muted">Soluciones profesionales para oficinas, tiendas y espacios comerciales. Mejora la imagen de tu negocio.</p>
+                            <div class="mt-auto pt-3">
+                                <a href="#calculator" class="btn btn-outline-primary">Cotizar ahora <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card card border-0 h-100">
+                        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Servicios Especiales">
+                        <div class="card-body">
+                            <h4 class="card-title mb-3">Servicios Especiales</h4>
+                            <p class="card-text text-muted">Limpieza profunda, post-construcción y para eventos especiales. Soluciones adaptadas a situaciones específicas.</p>
+                            <div class="mt-auto pt-3">
+                                <a href="#calculator" class="btn btn-outline-primary">Cotizar ahora <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mx-auto" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card card border-0 h-100">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Limpieza Industrial">
+                        <div class="card-body">
+                            <h4 class="card-title mb-3">Limpieza Industrial</h4>
+                            <p class="card-text text-muted">Servicio especializado para instalaciones industriales, fábricas y grandes espacios con necesidades específicas.</p>
+                            <div class="mt-auto pt-3">
+                                <a href="#calculator" class="btn btn-outline-primary">Cotizar ahora <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Banner -->
+<!-- Parallax Banner -->
+<!-- Banner con imagen de fondo y texto centrado -->
+<section style="height: 400px; position: relative; background-image: url('https://www.cocinavital.mx/wp-content/uploads/2020/10/como-limpiar-el-trapeador-truco.jpg'); background-size: cover; background-position: center;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;">
+      <div class="text-center text-white">
+        <h2 class="display-4 fw-bold mb-4">Transformamos Espacios</h2>
+        <p class="lead">Dejamos tu entorno impecable, higiénico y listo para disfrutar</p>
+      </div>
+    </div>
+  </section>
+  
 
 
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonial-section">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-heading center-heading mx-auto">Lo que dicen nuestros clientes</h2>
+                <p class="lead text-muted">Experiencias reales de quienes confían en nosotros</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <p class="mb-3">"Excelente servicio, muy profesionales y dedicados. El equipo fue puntual, eficiente y dejó mi casa impecable. ¡Totalmente recomendados!"</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="client-info">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="María González">
+                            <div>
+                                <h6 class="mb-0">María González</h6>
+                                <small class="text-muted">Cliente Residencial</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <p class="mb-3">"¡La mejor empresa de limpieza! Contrato sus servicios para mi oficina mensualmente y siempre quedan perfectas. Personal amable y muy profesional."</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="client-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Juan Pérez">
+                            <div>
+                                <h6 class="mb-0">Juan Pérez</h6>
+                                <small class="text-muted">Cliente Comercial</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <p class="mb-3">"Súper recomendados para limpiezas post-construcción. Dejaron mi nueva casa lista para mudarnos. Cumplen con todos los protocolos y son muy meticulosos."</p>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="client-info">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laura Sánchez">
+                            <div>
+                                <h6 class="mb-0">Laura Sánchez</h6>
+                                <small class="text-muted">Cliente Especial</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Testimonios -->
-<section class="bg-white text-black py-12">
-    <div class="max-w-5xl mx-auto px-4 text-center mb-10">
-        <h1 class="text-3xl md:text-4xl font-bold text-black mb-2 animate__animated animate__fadeIn" style="font-family: 'Nexa Bold', sans-serif;">
-            Testimonios de nuestros clientes
-        </h1>
-        <div class="w-24 h-1 bg-orange-500 mx-auto mb-8 animate__animated animate__fadeIn animate__delay-1s"></div>
-        
-        <div class="relative mt-8">
-            <div class="testimonial-carousel flex overflow-x-auto snap-x snap-mandatory hide-scrollbar space-x-4 pb-6">
-                <!-- Primer testimonio -->
-                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="animate__animated animate__fadeIn">
-                        <div class="text-orange-500 text-5xl mb-4">"</div>
-                        <p class="italic text-gray-700">"Excelente servicio, muy profesionales y dedicados. ¡Recomendados!"</p>
-                        <div class="mt-4 flex items-center justify-center">
-                            <div class="flex text-orange-500 mb-2">
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
+    <!-- Quote Calculator -->
+    <section id="calculator" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-heading center-heading mx-auto">Cotizador Profesional</h2>
+                <p class="lead text-muted">Calcula el costo de nuestros servicios en tiempo real</p>
+            </div>
+            
+            <div class="calculator-section">
+                <div class="row g-0">
+                    <div class="col-lg-8">
+                        <div class="p-4 p-lg-5">
+                            <form id="calculator-form" class="calculator-form">
+                                <div class="row g-4">
+                                    <div class="col-md-12">
+                                        <label for="service-type" class="form-label">Tipo de Servicio</label>
+                                        <select id="service-type" class="form-select shadow-none">
+                                            <option value="150" selected>Limpieza Básica ($150/hora)</option>
+                                            <option value="200">Limpieza Profunda ($200/hora)</option>
+                                            <option value="250">Limpieza Especial ($250/hora)</option>
+                                            <option value="300">Limpieza Industrial ($300/hora)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label for="hours-range" class="form-label">Horas por semana: <span id="hours-value">10</span></label>
+                                        <div class="range-container">
+                                            <input type="range" class="custom-range" id="hours-range" min="1" max="40" value="10">
+                                            <div class="range-labels">
+                                                <span>1</span>
+                                                <span>10</span>
+                                                <span>20</span>
+                                                <span>30</span>
+                                                <span>40</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label for="staff-count" class="form-label">Número de Personal</label>
+                                        <input type="number" class="form-control shadow-none" id="staff-count" min="1" max="10" value="1">
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label for="company-name" class="form-label">Nombre / Empresa</label>
+                                        <input type="text" class="form-control shadow-none" id="company-name" placeholder="Su nombre o empresa">
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Correo Electrónico</label>
+                                        <input type="email" class="form-control shadow-none" id="email" placeholder="ejemplo@correo.com">
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <label for="phone" class="form-label">Teléfono (opcional)</label>
+                                        <input type="tel" class="form-control shadow-none" id="phone" placeholder="(123) 456-7890">
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <label for="message" class="form-label">Información adicional (opcional)</label>
+                                        <textarea class="form-control shadow-none" id="message" rows="3" placeholder="Detalles específicos sobre su solicitud..."></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="quote-result">
+                            <h4 class="mb-4">Resumen de Cotización</h4>
+                            
+                            <div class="mb-3 d-flex justify-content-between">
+                                <span>Precio por hora:</span>
+                                <span id="price-per-hour">$150</span>
+                            </div>
+                            
+                            <div class="mb-3 d-flex justify-content-between">
+                                <span>Horas por semana:</span>
+                                <span id="total-hours">10</span>
+                            </div>
+                            
+                            <div class="mb-3 d-flex justify-content-between">
+                                <span>Número de personal:</span>
+                                <span id="staff-number">1</span>
+                            </div>
+                            
+                            <div class="mb-4 pt-3 border-top border-white border-opacity-25">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="h5 mb-0">Total Semanal:</span>
+                                    <span class="result-price" id="total-price">$1,500</span>
+                                </div>
+                                <small class="d-block opacity-75 mt-1">IVA incluido</small>
+                            </div>
+                            
+                            <button type="submit" id="submit-quote" class="btn btn-outline-light w-100 py-3">
+                                Solicitar Cotización Detallada
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-5 fw-bold mb-4" data-aos="fade-up">¿Listo para transformar tu espacio?</h2>
+                    <p class="lead mb-5" data-aos="fade-up" data-aos-delay="100">Contáctanos hoy mismo y descubre cómo podemos ayudarte a mantener tu entorno limpio y saludable.</p>
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3" data-aos="fade-up" data-aos-delay="200">
+                        <a href="#calculator" class="btn btn-light btn-lg">Solicitar Cotización</a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg">Contactar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="section-heading center-heading mx-auto">Contáctanos</h2>
+                <p class="lead text-muted">Estamos aquí para resolver todas tus dudas</p>
+            </div>
+            
+            <div class="row g-5">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="pe-lg-4">
+                        <h4 class="mb-4">Información de Contacto</h4>
+                        
+                        <div class="d-flex mb-4">
+                            <div class="me-3 text-primary">
+                                <i class="fas fa-map-marker-alt fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Dirección</h5>
+                                <p class="text-muted">261 N University Dr Plantation, FL 33324</p>
                             </div>
                         </div>
-                        <p class="font-bold text-gray-900">- María González</p>
+                        
+                        <div class="d-flex mb-4">
+                            <div class="me-3 text-primary">
+                                <i class="fas fa-phone-alt fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Teléfono</h5>
+                                <p class="text-muted"><a href="tel:9548575807" class="text-decoration-none">954 857 5807</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-4">
+                            <div class="me-3 text-primary">
+                                <i class="fas fa-envelope fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Email</h5>
+                                <p class="text-muted"><a href="mailto:info@nanasclean.com" class="text-decoration-none">info@nanasclean.com</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-4">
+                            <div class="me-3 text-primary">
+                                <i class="fas fa-clock fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Horario de Atención</h5>
+                                <p class="text-muted">Lunes - Viernes: 8:00 AM - 6:00 PM<br>Sábados: 9:00 AM - 3:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links mt-5">
+                            <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Segundo testimonio -->
-                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="animate__animated animate__fadeIn">
-                        <div class="text-orange-500 text-5xl mb-4">"</div>
-                        <p class="italic text-gray-700">"¡La mejor empresa de limpieza! Puntuales y muy eficientes."</p>
-                        <div class="mt-4 flex items-center justify-center">
-                            <div class="flex text-orange-500 mb-2">
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <form id="contact-form" class="contact-form bg-light p-4 p-lg-5 rounded-3 shadow-sm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Nombre</label>
+                                <input type="text" class="form-control shadow-none" id="name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="contact-email" class="form-label">Email</label>
+                                <input type="email" class="form-control shadow-none" id="contact-email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="contact-phone" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control shadow-none" id="contact-phone">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="subject" class="form-label">Asunto</label>
+                                <input type="text" class="form-control shadow-none" id="subject">
+                            </div>
+                            <div class="col-12">
+                                <label for="contact-message" class="form-label">Mensaje</label>
+                                <textarea class="form-control shadow-none" id="contact-message" rows="5" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="privacy-policy" required>
+                                    <label class="form-check-label" for="privacy-policy">
+                                        Acepto la <a href="#" class="text-decoration-none">política de privacidad</a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn btn-primary px-4 py-3">
+                                    Enviar Mensaje <i class="fas fa-paper-plane ms-2"></i>
+                                </button>
                             </div>
                         </div>
-                        <p class="font-bold text-gray-900">- Juan Pérez</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Map -->
+    <section class="py-0">
+        <div class="ratio ratio-21x9" style="max-height: 400px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3582.7650346778837!2d-80.2545442845657!3d26.108805083491864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9a82d5f2de827%3A0x9f5df4d9f2c90f3e!2s261%20N%20University%20Dr%2C%20Plantation%2C%20FL%2033324%2C%20EE.%20UU.!5e0!3m2!1ses!2sar!4v1618506491124!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-logo text-white">Nana's<span>Clean</span></div>
+                    <p class="text-muted mb-4">Brindamos servicios de limpieza profesional de alta calidad para hogares, oficinas, comercios e industrias en toda Florida.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 
-                <!-- Tercer testimonio -->
-                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="animate__animated animate__fadeIn">
-                        <div class="text-orange-500 text-5xl mb-4">"</div>
-                        <p class="italic text-gray-700">"¡Gracias por el excelente servicio! ¡Mi casa quedó impecable!"</p>
-                        <div class="mt-4 flex items-center justify-center">
-                            <div class="flex text-orange-500 mb-2">
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                            </div>
-                        </div>
-                        <p class="font-bold text-gray-900">- Ana Rodríguez</p>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="footer-links">
+                        <h5>Enlaces Rápidos</h5>
+                        <ul>
+                            <li><a href="#">Inicio</a></li>
+                            <li><a href="#about">Nuestra Empresa</a></li>
+                            <li><a href="#services">Servicios</a></li>
+                            <li><a href="#calculator">Cotizador</a></li>
+                            <li><a href="#contact">Contacto</a></li>
+                        </ul>
                     </div>
                 </div>
                 
-                <!-- Cuarto testimonio -->
-                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="animate__animated animate__fadeIn">
-                        <div class="text-orange-500 text-5xl mb-4">"</div>
-                        <p class="italic text-gray-700">"Contrato sus servicios mensualmente y siempre es perfecto. Personal amable y profesional."</p>
-                        <div class="mt-4 flex items-center justify-center">
-                            <div class="flex text-orange-500 mb-2">
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                            </div>
-                        </div>
-                        <p class="font-bold text-gray-900">- Carlos Mendoza</p>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="footer-links">
+                        <h5>Servicios</h5>
+                        <ul>
+                            <li><a href="#">Limpieza Residencial</a></li>
+                            <li><a href="#">Limpieza Comercial</a></li>
+                            <li><a href="#">Limpieza Industrial</a></li>
+                            <li><a href="#">Servicios Especiales</a></li>
+                            <li><a href="#">Post-construcción</a></li>
+                        </ul>
                     </div>
                 </div>
                 
-                <!-- Quinto testimonio -->
-                <div class="bg-white border-2 border-orange-500 text-gray-800 p-6 rounded-lg flex-shrink-0 w-full sm:w-80 snap-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="animate__animated animate__fadeIn">
-                        <div class="text-orange-500 text-5xl mb-4">"</div>
-                        <p class="italic text-gray-700">"Súper recomendados para limpiezas de oficinas. Cumplen con todos los protocolos de seguridad."</p>
-                        <div class="mt-4 flex items-center justify-center">
-                            <div class="flex text-orange-500 mb-2">
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                                <span>★</span>
-                            </div>
-                        </div>
-                        <p class="font-bold text-gray-900">- Laura Sánchez</p>
+                <div class="col-md-4 col-lg-4">
+                    <div class="footer-links">
+                        <h5>Contáctanos</h5>
+                        <ul class="list-unstyled">
+                            <li class="d-flex mb-3">
+                                <i class="fas fa-map-marker-alt me-3 mt-1 text-secondary"></i>
+                                <span>261 N University Dr Plantation, FL 33324</span>
+                            </li>
+                            <li class="d-flex mb-3">
+                                <i class="fas fa-phone-alt me-3 mt-1 text-secondary"></i>
+                                <span>954 857 5807</span>
+                            </li>
+                            <li class="d-flex mb-3">
+                                <i class="fas fa-envelope me-3 mt-1 text-secondary"></i>
+                                <span>info@nanasclean.com</span>
+                            </li>
+                            <li class="d-flex">
+                                <i class="fas fa-clock me-3 mt-1 text-secondary"></i>
+                                <span>Lun-Vie: 8AM-6PM<br>Sáb: 9AM-3PM</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
             
-            <!-- Flechas de navegación mejoradas -->
-            <button class="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white p-2 rounded-full shadow-lg focus:outline-none hover:bg-orange-600 transition-colors duration-300 z-10" id="prevBtn" aria-label="Anterior">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
-            <button class="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white p-2 rounded-full shadow-lg focus:outline-none hover:bg-orange-600 transition-colors duration-300 z-10" id="nextBtn" aria-label="Siguiente">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
-            
-            <!-- Indicadores de posición -->
-            <div class="dots-container flex justify-center mt-6 space-x-2"></div>
+            <div class="copyright-bar text-center">
+                <p class="mb-0">© 2025 Nana's Clean. Todos los derechos reservados.</p>
+            </div>
         </div>
-    </div>
-</section>
+    </footer>
 
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<div class="w-full relative">
-    <!-- Imagen de ancho completo como separador -->
-    <div class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" style="height: 120px;">
-      <!-- Puedes ajustar la altura cambiando el valor en style="height: 120px;" -->
-    </div>
-    
-    <!-- Opcionalmente, puedes agregar un patrón superpuesto para más estilo -->
-    <div class="absolute inset-0 bg-opacity-20 bg-black" style="background-image: url(assets/slice.png);"></div>
-    
-
-  </div>
-
-
-<style>
-    .bg-nanas-clean {
-        background-image: url('assets/monos.png'); /* Cambia por tu imagen de fondo */
-        background-size: cover;
-        background-position: center;
-    }
-    body {
-        font-family: 'Nexa', sans-serif; /* Aplicar la fuente Nexa */
-        color: black; /* Color de texto negro */
-    }
-</style>
-
-<style>
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      background: #2563eb;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-    input[type="range"]::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      background: #2563eb;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-  </style>
-
-<div class="bg-white-100 min-h-screen flex items-center justify-center p-4 mb-20">
-
-  <div class="max-w-2xl w-full bg-white rounded-lg shadow-lg p-6">
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-blue-600">Cotizador Nanas Clean</h1>
-      <p class="text-gray-600 mt-2">Calcula el costo de nuestros servicios de limpieza profesional</p>
-    </div>
-
-    <form id="cotizadorForm" class="space-y-6">
-      <!-- Selector de Servicio -->
-      <div>
-        <label for="servicio" class="block text-gray-700 font-medium mb-2">Tipo de Servicio</label>
-        <select 
-          id="servicio" 
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="limpieza-basica" data-precio="150">Limpieza Básica ($150/hora)</option>
-          <option value="limpieza-profunda" data-precio="200">Limpieza Profunda ($200/hora)</option>
-          <option value="limpieza-especial" data-precio="250">Limpieza Especial ($250/hora)</option>
-        </select>
-        <p class="text-sm text-gray-500 mt-1">Seleccione el tipo de servicio que necesita</p>
-      </div>
-
-      <!-- Range para Horas por Semana -->
-      <div>
-        <label for="horasSemana" class="block text-gray-700 font-medium mb-2">
-          Horas por Semana: <span id="horasValue" class="font-bold">10</span>
-        </label>
-        <div class="relative">
-          <input
-            type="range"
-            id="horasSemana"
-            min="1"
-            max="40"
-            value="10"
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-          />
-          <div class="w-full flex justify-between text-xs text-gray-500 px-1 mt-1">
-            <span>1</span>
-            <span>10</span>
-            <span>20</span>
-            <span>30</span>
-            <span>40</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Entrada de texto para Número de Nanas -->
-      <div>
-        <label for="numNanas" class="block text-gray-700 font-medium mb-2">Número de Nanas</label>
-        <input
-          type="number"
-          id="numNanas"
-          min="1"
-          max="10"
-          value="1"
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <!-- Datos de Contacto -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label for="nombreEmpresa" class="block text-gray-700 font-medium mb-2">Nombre de la Empresa</label>
-          <input
-            type="text"
-            id="nombreEmpresa"
-            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Ingrese el nombre de su empresa"
-          />
-        </div>
-        <div>
-          <label for="correo" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
-          <input
-            type="email"
-            id="correo"
-            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="ejemplo@empresa.com"
-          />
-        </div>
-      </div>
-
-      <!-- Resumen de Cotización -->
-      <div class="bg-blue-50 p-4 rounded-lg">
-        <h2 class="text-xl font-bold text-blue-700 mb-2">Resumen de Cotización</h2>
-        <div class="grid grid-cols-2 gap-2">
-          <p class="text-gray-600">Precio por hora:</p>
-          <p id="precioHora" class="text-gray-800 font-medium text-right">$150</p>
-          
-          <p class="text-gray-600">Horas por semana:</p>
-          <p id="horasSemanaResumen" class="text-gray-800 font-medium text-right">10</p>
-          
-          <p class="text-gray-600">Número de nanas:</p>
-          <p id="numNanasResumen" class="text-gray-800 font-medium text-right">1</p>
-          
-          <p class="text-gray-600 font-bold">Total semanal:</p>
-          <p id="totalCotizacion" class="text-blue-600 font-bold text-right text-xl">$1,500</p>
-        </div>
-      </div>
-
-      <!-- Botón de Solicitar Cotización -->
-      <button 
-        type="submit"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
-      >
-        Solicitar Cotización Detallada
-      </button>
-    </form>
-  </div>
-  </div>
-</div>
-
-  <script>
-    // Elementos del DOM
-    const servicioSelect = document.getElementById('servicio');
-    const horasRange = document.getElementById('horasSemana');
-    const horasValue = document.getElementById('horasValue');
-    const numNanasInput = document.getElementById('numNanas');
-    const precioHoraElement = document.getElementById('precioHora');
-    const horasSemanaResumen = document.getElementById('horasSemanaResumen');
-    const numNanasResumen = document.getElementById('numNanasResumen');
-    const totalCotizacion = document.getElementById('totalCotizacion');
-    const cotizadorForm = document.getElementById('cotizadorForm');
-
-    // Función para actualizar la cotización
-    function actualizarCotizacion() {
-      const selectedOption = servicioSelect.options[servicioSelect.selectedIndex];
-      const precioHora = parseInt(selectedOption.getAttribute('data-precio'));
-      const horas = parseInt(horasRange.value);
-      const nanas = parseInt(numNanasInput.value);
-      
-      // Actualizar los valores mostrados
-      horasValue.textContent = horas;
-      precioHoraElement.textContent = `$${precioHora}`;
-      horasSemanaResumen.textContent = horas;
-      numNanasResumen.textContent = nanas;
-      
-      // Calcular y mostrar el total
-      const total = precioHora * horas * nanas;
-      totalCotizacion.textContent = `$${total.toLocaleString()}`;
-    }
-
-    // Event listeners
-    servicioSelect.addEventListener('change', actualizarCotizacion);
-    horasRange.addEventListener('input', actualizarCotizacion);
-    numNanasInput.addEventListener('input', actualizarCotizacion);
-    
-    // Prevenir envío del formulario y mostrar resumen
-    cotizadorForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const nombreEmpresa = document.getElementById('nombreEmpresa').value;
-      const correo = document.getElementById('correo').value;
-      
-      if (!nombreEmpresa || !correo) {
-        alert('Por favor complete todos los campos obligatorios.');
-        return;
-      }
-      
-      alert('¡Cotización enviada! Nos pondremos en contacto con usted pronto.');
-    });
-
-    // Inicializar la cotización
-    actualizarCotizacion();
-  </script>
-
-</body>
-
-
-
-<style>
-    /* Ocultar la barra de desplazamiento pero mantener la funcionalidad */
-    .hide-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;     /* Firefox */
-    }
-    .hide-scrollbar::-webkit-scrollbar {
-        display: none;  /* Chrome, Safari, Opera */
-    }
-    
-    /* Estilo para los puntos indicadores activos */
-    .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #e5e7eb;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    
-    .dot.active {
-        background-color: #f97316;
-        width: 12px;
-        height: 12px;
-    }
-    
-    /* Animación para aparición de testimonios */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .animate__fadeIn {
-        animation: fadeIn 0.6s ease-out forwards;
-    }
-    
-    .animate__delay-1s {
-        animation-delay: 0.2s;
-    }
-    
-    /* Hacer que las tarjetas sean más responsivas */
-    @media (max-width: 640px) {
-        .testimonial-carousel > div {
-            width: 85vw;
-        }
-    }
-</style>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const carousel = document.querySelector('.testimonial-carousel');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const testimonials = carousel.querySelectorAll('.testimonial-carousel > div');
-        const dotsContainer = document.querySelector('.dots-container');
-        
-        let currentIndex = 0;
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        // Crear los indicadores de posición (dots)
-        testimonials.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
-            dotsContainer.appendChild(dot);
+    <script>
+        // Initialize AOS
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS animation library if it's loaded
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            once: true
         });
+    }
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('mainNav');
+        if (!navbar) return;
         
-        const dots = dotsContainer.querySelectorAll('.dot');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+            navbar.classList.remove('bg-transparent');
+            navbar.classList.add('bg-white');
+        } else {
+            navbar.classList.remove('scrolled');
+            if (!document.querySelector('.navbar-collapse.show')) {
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-white');
+            }
+        }
+    });
+    
+    // Handle mobile navbar
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbar = document.getElementById('mainNav');
+    
+    if (navbarToggler && navbar) {
+        navbarToggler.addEventListener('click', function() {
+            if (!navbar.classList.contains('bg-white')) {
+                navbar.classList.add('bg-white');
+                navbar.classList.remove('bg-transparent');
+            }
+        });
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const navbarHeight = document.getElementById('mainNav')?.offsetHeight || 0;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse && navbarCollapse.classList.contains('show') && navbarToggler) {
+                    navbarToggler.click();
+                }
+            }
+        });
+    });
+    
+    // Parallax effect
+    window.addEventListener('scroll', function() {
+        const parallaxImage = document.querySelector('.parallax-image');
+        if (parallaxImage) {
+            const scrollPosition = window.pageYOffset;
+            parallaxImage.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+        }
+    });
+    
+    // Counter animation
+    const counterAnimation = () => {
+        const counters = document.querySelectorAll('.counter-value');
+        const speed = 200;
         
-        // Función para ir a una diapositiva específica
-        function goToSlide(index) {
-            if (index < 0) index = testimonials.length - 1;
-            if (index >= testimonials.length) index = 0;
+        counters.forEach(counter => {
+            const animate = () => {
+                const value = +counter.getAttribute('data-count');
+                const data = +counter.innerText || 0;
+                
+                const time = value / speed;
+                if (data < value) {
+                    counter.innerText = Math.ceil(data + time);
+                    setTimeout(animate, 1);
+                } else {
+                    counter.innerText = value.toLocaleString();
+                }
+            }
             
-            currentIndex = index;
-            
-            // Calcular la posición de desplazamiento
-            const testimonialWidth = testimonials[0].offsetWidth;
-            const margin = parseInt(window.getComputedStyle(testimonials[0]).marginRight);
-            const scrollPosition = index * (testimonialWidth + margin);
-            
-            carousel.scrollTo({
-                left: scrollPosition,
-                behavior: 'smooth'
-            });
-            
-            // Actualizar dots
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-            
-            // Activar animación de aparición
-            testimonials.forEach((testimonial, i) => {
-                const content = testimonial.querySelector('.animate__fadeIn');
-                if (i === currentIndex) {
-                    content.style.opacity = '0';
-                    setTimeout(() => {
-                        content.style.animation = 'none';
-                        void content.offsetWidth; // Forzar reflow
-                        content.style.animation = 'fadeIn 0.6s ease-out forwards';
-                    }, 50);
+            animate();
+        });
+    };
+    
+    // Start counter animation when in view
+    if ('IntersectionObserver' in window) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counterAnimation();
+                    observer.unobserve(entry.target);
                 }
             });
+        }, observerOptions);
+        
+        const counterSection = document.querySelector('.counter-value');
+        if (counterSection) {
+            observer.observe(counterSection);
         }
-        
-        // Botones de navegación
-        prevBtn.addEventListener('click', () => {
-            goToSlide(currentIndex - 1);
-        });
-        
-        nextBtn.addEventListener('click', () => {
-            goToSlide(currentIndex + 1);
-        });
-        
-        // Soporte para gestos táctiles (swipe)
-        carousel.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        carousel.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            if (touchEndX + swipeThreshold < touchStartX) {
-                goToSlide(currentIndex + 1);
-            } else if (touchEndX > touchStartX + swipeThreshold) {
-                goToSlide(currentIndex - 1);
-            }
-        }
-        
-        // Detectar cambios de desplazamiento para actualizar los dots
-        carousel.addEventListener('scroll', () => {
-            const testimonialWidth = testimonials[0].offsetWidth;
-            const margin = parseInt(window.getComputedStyle(testimonials[0]).marginRight);
-            const scrollPosition = carousel.scrollLeft;
-            
-            // Calcular qué tarjeta está más visible
-            const newIndex = Math.round(scrollPosition / (testimonialWidth + margin));
-            
-            if (newIndex !== currentIndex && newIndex >= 0 && newIndex < testimonials.length) {
-                currentIndex = newIndex;
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === currentIndex);
-                });
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        window.addEventListener('scroll', function() {
+            const counterSection = document.querySelector('.counter-box');
+            if (counterSection) {
+                const position = counterSection.getBoundingClientRect();
+                
+                // Check if element is in viewport
+                if(position.top < window.innerHeight && position.bottom >= 0) {
+                    counterAnimation();
+                    window.removeEventListener('scroll', this);
+                }
             }
         });
+    }
+    
+    // Calculator functionality
+    const serviceType = document.getElementById('service-type');
+    const hoursRange = document.getElementById('hours-range');
+    const hoursValue = document.getElementById('hours-value');
+    const staffCount = document.getElementById('staff-count');
+    const pricePerHour = document.getElementById('price-per-hour');
+    const totalHours = document.getElementById('total-hours');
+    const staffNumber = document.getElementById('staff-number');
+    const totalPrice = document.getElementById('total-price');
+    const submitQuote = document.getElementById('submit-quote');
+    
+    // Update the calculator
+    function updateCalculator() {
+        if (!serviceType || !hoursRange || !staffCount || !pricePerHour || !hoursValue || 
+            !totalHours || !staffNumber || !totalPrice) return;
+            
+        const pricePerHourValue = parseInt(serviceType.value) || 150;
+        const hours = parseInt(hoursRange.value) || 10;
+        const staff = parseInt(staffCount.value) || 1;
         
-        // Auto slide cada 5 segundos
-        let autoSlideInterval = setInterval(() => {
-            goToSlide(currentIndex + 1);
-        }, 5000);
+        pricePerHour.textContent = `$${pricePerHourValue}`;
+        hoursValue.textContent = hours;
+        totalHours.textContent = hours;
+        staffNumber.textContent = staff;
         
-        // Pausar el auto-slide cuando el usuario interactúa
-        carousel.addEventListener('mouseenter', () => {
-            clearInterval(autoSlideInterval);
+        const total = pricePerHourValue * hours * staff;
+        totalPrice.textContent = `$${total.toLocaleString()}`;
+    }
+    
+    // Event listeners for calculator inputs
+    if (serviceType) serviceType.addEventListener('change', updateCalculator);
+    if (hoursRange) hoursRange.addEventListener('input', updateCalculator);
+    if (staffCount) staffCount.addEventListener('input', updateCalculator);
+    
+    // Initialize calculator on page load
+    updateCalculator();
+    
+    // Form submission
+    if (submitQuote) {
+        submitQuote.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const companyName = document.getElementById('company-name')?.value;
+            const email = document.getElementById('email')?.value;
+            
+            if (!companyName || !email) {
+                alert('Por favor completa los campos obligatorios: Nombre/Empresa y Correo Electrónico.');
+                return;
+            }
+            
+            // Here you'd typically send this to a server
+            alert('¡Gracias por tu solicitud! Te enviaremos una cotización detallada a tu correo electrónico en breve.');
         });
-        
-        carousel.addEventListener('mouseleave', () => {
-            autoSlideInterval = setInterval(() => {
-                goToSlide(currentIndex + 1);
-            }, 5000);
+    }
+    
+    // Contact form submission
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name')?.value;
+            const email = document.getElementById('contact-email')?.value;
+            const message = document.getElementById('contact-message')?.value;
+            
+            if (!name || !email || !message) {
+                alert('Por favor completa todos los campos obligatorios.');
+                return;
+            }
+            
+            // Here you'd typically send this to a server
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo a la brevedad.');
+            contactForm.reset();
         });
-        
-        // Inicializar las animaciones
-        setTimeout(() => {
-            testimonials[0].querySelector('.animate__fadeIn').style.animation = 'fadeIn 0.6s ease-out forwards';
-        }, 100);
-        
-        // Asegurarse de que la primera tarjeta esté en su posición correcta en dispositivos móviles
-        if (window.innerWidth < 640) {
-            carousel.scrollTo(0, 0);
+    }
+    
+    // Handle scroll to top
+    const scrollTopBtn = document.createElement('button');
+    scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollTopBtn.classList.add('btn', 'btn-primary', 'position-fixed', 'bottom-0', 'end-0', 'm-4', 'rounded-circle', 'p-3', 'd-flex', 'align-items-center', 'justify-content-center');
+    scrollTopBtn.style.opacity = '0';
+    scrollTopBtn.style.transition = 'opacity 0.3s, transform 0.3s';
+    scrollTopBtn.style.transform = 'translateY(20px)';
+    scrollTopBtn.style.zIndex = '999';
+    scrollTopBtn.style.width = '50px';
+    scrollTopBtn.style.height = '50px';
+    document.body.appendChild(scrollTopBtn);
+    
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.style.opacity = '1';
+            scrollTopBtn.style.transform = 'translateY(0)';
+        } else {
+            scrollTopBtn.style.opacity = '0';
+            scrollTopBtn.style.transform = 'translateY(20px)';
         }
     });
-</script>
+});
 
+    window.addEventListener("scroll", function () {
+        const parallax = document.querySelector('.parallax');
+        let scrollTop = window.pageYOffset;
+        parallax.style.transform = 'translateY(' + scrollTop * 0.4 + 'px)';
+    });
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        // Inicializar AOS
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            mirror: false
-        });
-        
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-        
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const closeMenuBtn = document.getElementById('closeMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('translate-x-full');
-        });
-        
-        closeMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('translate-x-full');
-        });
-        
-        // Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('#mobileMenu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('translate-x-full');
-            });
-        });
-        
-        // Parallax effect
-        const parallaxImage = document.getElementById('parallaxImage');
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset;
-            if (parallaxImage) {
-                parallaxImage.style.transform = `translateY(${scrollPosition * 0.15}px) scale(1.1)`;
-            }
-        });
     </script>
-<div class="bg-gray-100 flex flex-col min-h-screen">
-
-    <!-- Contenedor Principal -->
-    <div class="bg-white flex flex-col min-h-screen bg-cover bg-center" 
-        style="background-image: url('https://contractorsinsurance.ca/wp-content/uploads/2024/07/Featured-image-.jpg');">
-        
-        <!-- Footer -->
-        <footer class="relative bg-blue-900 text-white py-12 mt-auto">
-            
-           <!-- Tarjeta de Contacto (Ahora responsiva) -->
-<div class="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-white text-gray-800 p-6 rounded-lg shadow-lg max-w-4xl w-[95%] md:w-[85%] flex flex-col md:flex-row items-center md:justify-between text-center md:text-left mb-6">
     
-    <div class="flex items-center space-x-3">
-        <img src="assets/logo2.png" alt="Logo" class="w-16 h-16 rounded-full">
-        <div>
-          
-        </div>
-    </div>
-    
-    <div class="mt-4 md:mt-0">
-        <p class="font-semibold">Llámanos</p>
-        <p class="text-lg font-bold text-blue-500">954 857 5807</p>
-    </div>
-    
-    <div class="mt-4 md:mt-0">
-        <p class="font-semibold">Ubicados en:</p>
-        <p class="text-sm md:text-base">261 N University Dr Plantation, FL 33324</p>
-    </div>
-</div>
-
-    
-            <!-- Contenido Principal del Footer -->
-            <div class="max-w-6xl mx-auto px-6 pt-24 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                
-                <!-- Explore -->
-                <div>
-                    <h3 class="font-semibold text-lg">Explorar</h3>
-                    <p class="mt-3 text-gray-300 text-sm md:text-base">
-                        Brindamos servicios de limpieza de alta calidad para escuelas, universidades, negocios e instituciones en Florida.
-                    </p>
-                    
-                    <!-- Redes Sociales -->
-                    <div class="flex justify-center md:justify-start space-x-4 mt-4">
-                        <a href="#" class="text-pink-500 text-2xl"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-blue-500 text-2xl"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-green-500 text-2xl"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-    
-                <!-- Links -->
-                <div>
-                    <h3 class="font-semibold text-lg">Enlaces</h3>
-                    <ul class="mt-3 space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white">Inicio</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Sobre Nosotros</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Servicios</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white">Contáctanos</a></li>
-                    </ul>
-                </div>
-    
-                <!-- Servicios -->
-                <div>
-                    <h3 class="font-semibold text-lg">Servicios</h3>
-                    <ul class="mt-3 space-y-2">
-                        <li>✔ Limpieza Comercial</li>
-                        <li>✔ Limpieza Post Construcción</li>
-                        <li>✔ Reparación de Aire Acondicionado</li>
-                        <li>✔ Pintura Residencial y Comercial</li>
-                        <li>✔ Encerado de Pisos</li>
-                        <li>✔ Limpieza de Alfombras</li>
-                    </ul>
-                </div>
-            </div>
-    
-            <!-- Copyright -->
-            <div class="text-center text-gray-400 text-sm mt-8 px-4">
-                2025 © Website diseñado y desarrollado por <span class="font-semibold text-white">Fantazy Labz</span>
-            </div>
-        </footer>
-    </div>
-
-    <!-- FontAwesome para iconos de redes sociales -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-    <!-- FontAwesome for Icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-    
-
-    
-</body>
-</html>
-
